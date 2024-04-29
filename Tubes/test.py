@@ -57,11 +57,27 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(original_image, (int(original_image.get_width() * scale_factor), int(original_image.get_height() * scale_factor)))
         self.rect = self.image.get_rect()  # Mengambil rect dari gambar player_ship
         self.image.set_colorkey((0, 0, 0))  # Set warna hitam sebagai transparansi
+        
+        self.score = 0  # Score awal
+        self.lives = 3  # Jumlah nyawa awal
+        self.level = 1  # Level awal
 
     def update(self):
         mouse = pygame.mouse.get_pos()
         self.rect.x = mouse[0]
         self.rect.y = mouse[1]
+
+    def increase_score(self, points):
+        self.score += points
+
+    def decrease_score(self, points):
+        self.score -= points
+
+    def decrease_lives(self):
+        self.lives -= 1
+
+    def level_up(self):
+        self.level += 1
 
 #Kelas Enemy
 class Enemy(Player):
